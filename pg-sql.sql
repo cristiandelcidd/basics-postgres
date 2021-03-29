@@ -62,3 +62,31 @@ SELECT LOWER(CONCAT(name, ', ', manufacturer)) AS model_brand FROM phones;
 
 -- length (10) in this case
 SELECT LENGTH('Hola Mundo');
+
+SELECT name, area FROM cities WHERE area = 504
+
+SELECT name, area FROM cities WHERE country = 'Honduras'
+
+SELECT name, population FROM cities WHERE population BETWEEN 20000 AND 25000;
+
+SELECT name, population FROM cities WHERE name IN ('San Pedro Sula', 'Querétaro');
+
+SELECT name, population FROM cities WHERE name NOT IN ('San Pedro Sula', 'Querétaro');
+
+SELECT name, population FROM cities WHERE population NOT IN (20302, 59324);
+
+SELECT name, population FROM cities WHERE population NOT IN (20302, 59324) AND name = 'San Pedro Sula';
+
+SELECT name, population FROM cities WHERE population NOT IN (20302, 59324) OR name = 'San Pedro Sula';
+
+SELECT name, population FROM cities WHERE population NOT IN (20302, 59324) OR name = 'San Pedro Sula' OR name = 'Tegucigalpa';
+
+-- Exercise
+
+SELECT name, units_sold FROM phones WHERE units_sold > 5000;
+
+SELECT name, manufacturer FROM phones WHERE manufacturer IN ('Samsung', 'Apple');
+
+SELECT name, manufacturer FROM phones WHERE manufacturer = 'Samsung' OR manufacturer = 'Apple';
+
+-- end the exercise
