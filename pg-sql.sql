@@ -90,3 +90,21 @@ SELECT name, manufacturer FROM phones WHERE manufacturer IN ('Samsung', 'Apple')
 SELECT name, manufacturer FROM phones WHERE manufacturer = 'Samsung' OR manufacturer = 'Apple';
 
 -- end the exercise
+
+-- Exercise
+
+SELECT name, price * units_sold AS total_revenue FROM phones WHERE price * units_sold > 1000000;
+
+-- Update a field in a table
+UPDATE cities SET name = 'Tegucigalpa' WHERE country = 'Honduras';
+
+-- Delete a item from a table
+DELETE FROM cities WHERE name = 'San Salvador';
+
+-- Exercise
+
+UPDATE phones SET units_sold = 7000 WHERE name = 'N1280';
+
+DELETE FROM phones WHERE manufacturer = 'Samsung';
+
+-- end the Exercise
