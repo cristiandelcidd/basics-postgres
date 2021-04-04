@@ -140,3 +140,50 @@ SELECT * FROM photos;
 SELECT * FROM photos WHERE user_id = 2;
 
 SELECT * FROM photos JOIN users ON users.id = photos.user_id;
+
+-- Exercise
+
+CREATE TABLE boats (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR
+);
+
+INSERT INTO boats(name)
+VALUES
+	('Rogue Wave'),
+  ('Harbor Master');
+
+CREATE TABLE crew_members (
+	id SERIAL PRIMARY KEY,
+  first_name VARCHAR,
+  boat_id INTEGER REFERENCES boats(id)
+);
+
+INSERT INTO crew_members(first_name, boat_id)
+VALUES ('Patricio', 1), ('Eliza', 2), ('Marcos', 1);
+
+SELECT * FROM crew_members
+JOIN boats ON boats.id = crew_members.boat_id;
+
+-- end the exercise
+
+INSERT INTO photos (url, user_id)
+VALUES ('https://image.jpg', NULL);
+
+DROP TABLE photos;
+
+CREATE TABLE photos(
+	id SERIAL PRIMARY KEY,
+  url VARCHAR(200),
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+);
+
+INSERT INTO photos(url, user_id)
+VALUES
+	('https://image1.jpg', 1),
+  ('https://image2.jpg', 2),
+  ('https://image3.jpg', 3),
+  ('https://image4.jpg', 2);
+
+
+DELETE FROM users WHERE id = 1
