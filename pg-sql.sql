@@ -108,3 +108,35 @@ UPDATE phones SET units_sold = 7000 WHERE name = 'N1280';
 DELETE FROM phones WHERE manufacturer = 'Samsung';
 
 -- end the Exercise
+
+CREATE TABLE users (
+	id SERIAL PRIMARY KEY,
+  username VARCHAR(50)
+);
+
+INSERT INTO users (username)
+VALUES
+	('pedro123'),
+  ('fran4d'),
+  ('federrico8g');
+
+SELECT * FROM users;
+
+CREATE TABLE photos(
+	id SERIAL PRIMARY KEY,
+  url VARCHAR(200),
+  user_id INTEGER REFERENCES users(id)
+);
+
+INSERT INTO photos(url, user_id)
+VALUES
+	('https://image1.jpg', 1),
+  ('https://image2.jpg', 2),
+  ('https://image3.jpg', 3),
+  ('https://image4.jpg', 4);
+
+SELECT * FROM photos;
+
+SELECT * FROM photos WHERE user_id = 2;
+
+SELECT * FROM photos JOIN users ON users.id = photos.user_id;
