@@ -118,7 +118,9 @@ INSERT INTO users (username)
 VALUES
 	('pedro123'),
   ('fran4d'),
-  ('federrico8g');
+  ('federrico8g'),
+  ('reinaldo'),
+  ('fakundra');
 
 SELECT * FROM users;
 
@@ -187,3 +189,66 @@ VALUES
 
 
 DELETE FROM users WHERE id = 1
+
+
+CREATE TABLE photos(
+	id SERIAL PRIMARY KEY,
+  url VARCHAR(200),
+  user_id INTEGER REFERENCES users(id) ON DELETE SET NULL
+);
+
+
+CREATE TABLE comments(
+	id SERIAL PRIMARY KEY,
+  contents VARCHAR(240),
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  photo_id INTEGER REFERENCES photos(id) ON DELETE CASCADE
+);
+
+INSERT INTO comments(contents, user_id, photo_id)
+VALUES
+	('Integer tristique volutpat diam ut.', 1, 1),
+  ('Morbi eu justo at magna.', 2, 3),
+  ('In eu tincidunt ex. Ut.', 3, 2),
+  ('Etiam volutpat orci aliquam metus.', 4, 4),
+  ('Vestibulum eleifend quam felis, ut.', 5, 6),
+  ('Maecenas nisl leo, dictum eget.', 1, 5),
+  ('Phasellus id velit metus. In.', 2, 8),
+  ('Vestibulum aliquam nibh sed augue.', 3, 7);
+
+SELECT contents, username FROM COMMENTS JOIN users ON users.id = comments.user_id;
+
+SELECT * FROM comments JOIN users ON users.id = comments.user_id;
+
+SELECT contents, url FROM comments JOIN photos ON photos.id = comments.photo_id;
+
+-- Exercise
+
+CREATE TABLE authors (
+	id SERIAL PRIMARY KEY,
+  name VARCHAR(240)
+)
+
+INSERT INTO authors(name)
+VALUES
+	('JK Rowling'),
+  ('Stephen King'),
+  ('Jorge Montenegro'),
+  ('Ramon Amaya Amador');
+
+CREATE TABLE books (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(240),
+  author_id INTEGER REFERENCES authors(id) ON DELETE CASCADE
+);
+
+INSERT INTO books (title, author_id)
+VALUES
+  ('It', 2),
+  ('Harry Potter', 1),
+  ('Prision verde', 4),
+  ('Cuentos y leyendas de Honduras', 3);
+
+SELECT title, name FROM books JOIN authors ON authors.id = books.author_id;
+
+-- end the exercise
