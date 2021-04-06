@@ -252,3 +252,26 @@ VALUES
 SELECT title, name FROM books JOIN authors ON authors.id = books.author_id;
 
 -- end the exercise
+
+-- SELECT b.id AS book_id,	title, name FROM books b JOIN authors ON authors.id = b.author_id;
+SELECT b.id AS book_id,	title, name FROM books AS b JOIN authors ON authors.id = b.author_id;
+
+INSERT INTO books(title, author_id)
+VALUES
+	('Jacinta Peralta', NULL)
+
+
+-- Four kinds of Joins
+
+-- INNER JOIN
+SELECT * FROM books JOIN authors ON authors.id = books.author_id;
+SELECT * FROM books INNER JOIN authors ON authors.id = books.author_id;
+
+-- LEFT OUTER JOIN
+SELECT * FROM books LEFT JOIN authors ON authors.id = books.author_id;
+
+-- RIGHT OUTER JOIN
+SELECT * FROM books RIGHT JOIN authors ON authors.id = books.author_id;
+
+-- FULL JOIN
+SELECT * FROM books FULL JOIN authors ON authors.id = books.author_id;
