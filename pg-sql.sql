@@ -275,3 +275,31 @@ SELECT * FROM books RIGHT JOIN authors ON authors.id = books.author_id;
 
 -- FULL JOIN
 SELECT * FROM books FULL JOIN authors ON authors.id = books.author_id;
+
+
+-- Exercise
+SELECT name, title FROM authors LEFT JOIN books ON books.author_id = authors.id;
+
+SELECT name, title FROM books RIGHT JOIN authors ON  authors.id = books.author_id;
+
+-- end the exercise
+
+SELECT url, contents, username FROM comments
+JOIN photos ON photos.id = comments.photo_id
+JOIN users ON users.id = photos.user_id AND users.id = comments.user_id;
+
+
+-- Exercise
+CREATE TABLE reviews (
+	id SERIAL PRIMARY KEY,
+  rating INTEGER,
+  reviewer_id INTEGER REFERENCES authors(id) ON DELETE CASCADE,
+  book_id INTEGER REFERENCES books(id) ON DELETE CASCADE
+)
+
+INSERT INTO reviews(rating, reviewer_id, book_id)
+VALUES
+	(4, 1, 4),
+  (5, 3, 2),
+  (3, 2, 3),
+  (2, 4, 1);
