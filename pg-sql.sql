@@ -303,3 +303,28 @@ VALUES
   (5, 3, 2),
   (3, 2, 3),
   (2, 4, 1);
+
+-- end the exercise
+
+
+-- Using GROUP BY
+SELECT reviewer_id
+FROM reviews
+GROUP BY reviewer_id;
+
+--
+SELECT MAX(id) FROM reviews; -- Max
+SELECT MIN(id) FROM reviews; -- Min
+SELECT AVG(id) FROM reviews; -- Average
+SELECT COUNT(id) FROM reviews; -- How many id's are there
+SELECT SUM(id) FROM reviews; -- Sum of id's
+
+SELECT reviewer_id, MAX(id) FROM reviews GROUP BY reviewer_id;
+
+SELECT reviewer_id, COUNT(id) FROM reviews GROUP BY reviewer_id;
+
+SELECT COUNT(author_id) FROM books;
+
+SELECT COUNT(*) FROM books;
+
+SELECT reviewer_id, COUNT(*) FROM reviews GROUP BY reviewer_id;
