@@ -328,3 +328,97 @@ SELECT COUNT(author_id) FROM books;
 SELECT COUNT(*) FROM books;
 
 SELECT reviewer_id, COUNT(*) FROM reviews GROUP BY reviewer_id;
+
+--
+CREATE TABLE users(
+	id SERIAL PRIMARY KEY,
+  username VARCHAR(250)
+);
+
+INSERT INTO users (username)
+VALUES
+	('pedro123'),
+  ('fran4d'),
+  ('federrico8g'),
+  ('reinaldo'),
+  ('fakundra');
+
+CREATE TABLE photos(
+	id SERIAL PRIMARY KEY,
+  url VARCHAR(250),
+  user_id INTEGER REFERENCES users(id)
+);
+
+INSERT INTO photos(url, user_id)
+VALUES
+	('https://image1.jpg', 1),
+  ('https://image2.jpg', 2),
+  ('https://image3.jpg', 3),
+  ('https://image4.jpg', 4);
+
+CREATE TABLE comments(
+	id SERIAL PRIMARY KEY,
+  contents VARCHAR(250),
+  user_id INTEGER REFERENCES users(id),
+  photo_id INTEGER REFERENCES photos(id)
+);
+
+INSERT INTO comments(contents, user_id, photo_id)
+VALUES
+	('Integer tristique volutpat diam ut.', 1, 1),
+  ('Morbi eu justo at magna.', 2, 3),
+  ('In eu tincidunt ex. Ut.', 3, 2),
+  ('Etiam volutpat orci aliquam metus.', 4, 4),
+  ('Vestibulum eleifend quam felis, ut.', 4, 3),
+  ('Maecenas nisl leo, dictum eget.', 1, 1),
+  ('Phasellus id velit metus. In.', 2, 3),
+  ('Vestibulum aliquam nibh sed augue.', 3, 1),
+  ('Integer tristique volutpat diam ut.', 5, 2);
+
+SELECT photo_id, COUNT(*) FROM comments GROUP BY photo_id;
+
+-- exercise
+
+CREATE TABLE authors (
+	id SERIAL PRIMARY KEY,
+  name VARCHAR(240)
+);
+
+INSERT INTO authors(name)
+VALUES
+	('JK Rowling'),
+  ('Stephen King'),
+  ('Jorge Montenegro'),
+  ('Ramon Amaya Amador');
+
+CREATE TABLE books (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(240),
+  author_id INTEGER REFERENCES authors(id) ON DELETE CASCADE
+);
+
+INSERT INTO books (title, author_id)
+VALUES
+  ('It', 2),
+  ('Harry Potter', 1),
+  ('Prision verde', 4),
+  ('Cuentos y leyendas de Honduras', 3);
+
+SELECT author_id, COUNT(*) as books_authored
+FROM books
+GROUP BY author_id;
+
+-- Grouping with JOIN
+SELECT name, COUNT(*) as books_authored
+FROM books
+JOIN authors ON authors.id = books.author_id
+GROUP BY authors.name;
+
+-- end the exercise
+
+-- Using HAVING with GROUP BY
+SELECT photo_id, COUNT(*)
+FROM comments
+WHERE photo_id < 3
+GROUP BY photo_id
+HAVING COUNT(*) > 2;
