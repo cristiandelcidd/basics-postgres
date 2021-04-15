@@ -422,3 +422,31 @@ FROM comments
 WHERE photo_id < 3
 GROUP BY photo_id
 HAVING COUNT(*) > 2;
+
+SELECT user_id, COUNT(*)
+FROM comments WHERE photo_id <= 3
+GROUP BY user_id
+HAVING COUNT(*) >= 2
+
+-- Exercise
+CREATE TABLE phones (
+  name VARCHAR(50),
+  manufacturer VARCHAR(50),
+  price INTEGER,
+  units_sold INTEGER
+);
+
+INSERT INTO phones(name, manufacturer, price, units_sold)
+VALUES
+  ( 'N1280', 'Nokia', 199, 1925 ),
+  ( 'Iphone XII', 'Apple', 399, 9436 ),
+  ( 'S21 Plus', 'Samsung', 299, 2359 ),
+  ( 'S20 Ultra', 'Samsung', 250, 2385 ),
+  ( 'N8', 'Nokia', 150, 7543 );
+
+SELECT manufacturer, SUM(price*units_sold) as total_revenue
+FROM phones
+GROUP BY manufacturer
+HAVING SUM(price*units_sold) > 2000000;
+
+-- end the exercise
