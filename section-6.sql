@@ -760,3 +760,64 @@ ORDER BY price
 LIMIT 5
 OFFSET 1;
 
+-- Using UNION and UNION ALL
+(
+  SELECT * FROM products
+	ORDER BY price DESC
+	LIMIT 4
+)
+UNION
+(
+  	SELECT * FROM products
+	ORDER BY price / weight DESC
+	LIMIT 4
+)
+-----------------------------------
+(
+  	SELECT * FROM products
+	ORDER BY price DESC
+	LIMIT 4
+)
+UNION ALL
+(
+  	SELECT * FROM products
+	ORDER BY price / weight DESC
+	LIMIT 4
+)
+-----------------------------------
+-- INTERSECT
+(
+	SELECT * FROM products
+	ORDER BY price DESC
+	LIMIT 4
+)
+INTERSECT -- it only returns the values ​​that are repeated in the selected tables
+(
+	SELECT * FROM products
+	ORDER BY price / weight DESC
+	LIMIT 4
+)
+(
+	SELECT * FROM products
+	ORDER BY price DESC
+	LIMIT 4
+)
+INTERSECT ALL -- it only returns the values ​​that are repeated in the selected tables
+(
+	SELECT * FROM products
+	ORDER BY price / weight DESC
+	LIMIT 4
+)
+
+-- EXCEPT
+(
+	SELECT * FROM products
+	ORDER BY price DESC
+	LIMIT 4
+)
+EXCEPT ALL
+(
+	SELECT * FROM products
+	ORDER BY price / weight DESC
+	LIMIT 4
+)
