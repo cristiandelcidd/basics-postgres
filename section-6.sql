@@ -739,3 +739,24 @@ GROUP BY paid;
 SELECT first_name, last_name, paid
 FROM users
 JOIN orders ON orders.user_id = users.id;
+
+-- ORDER BY
+SELECT * FROM products ORDER BY price ASC;
+SELECT * FROM products ORDER BY price DESC;
+
+SELECT * FROM products ORDER BY name; -- Ascendent
+SELECT * FROM products ORDER BY name DESC; -- Descendent
+
+SELECT * FROM products ORDER BY price, weight;
+SELECT * FROM products ORDER BY price, weight DESC;
+
+-- OFFSET & LIMIT
+SELECT * FROM users
+OFFSET 45 -- skips the specified number of items, does not include them in the result
+LIMIT 3; -- limit the number of items to display
+
+SELECT * FROM products
+ORDER BY price
+LIMIT 5
+OFFSET 1;
+
